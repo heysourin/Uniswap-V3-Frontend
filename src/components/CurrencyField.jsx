@@ -26,7 +26,7 @@ const CurrencyField = (props) => {
         <span className="tokenName">{props.tokenName}</span>
         <div className="balanceContainer">
           <span className="balanceAmount">
-            Balance: {props.balance?.toFixed(3)}
+            Balance:{props.balance?.toFixed(3)}
           </span>
         </div>
       </div>
