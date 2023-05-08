@@ -25,12 +25,18 @@ function App() {
   const [uniContract, setUniContract] = useState(undefined);
   const [wethAmount, setWethAmount] = useState(undefined);
   const [uniAmount, setUniAmount] = useState(undefined);
-
+  import{} from "./A"
   useEffect(() => {
     const onLoad = () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       // console.log(provider);
       setProvider(provider);
+      const wethContract = getWethContract();
+      setWethContract(wethContract);
+
+      const uniContract = getUniContract();
+      setUniContract(uniContract);
+
     };
     onLoad();
     // getWalletAddress();
@@ -66,10 +72,16 @@ function App() {
   };
 
   const getWalletAddress = () => {
-    // signer.getAddress().then((address) => {
-    //   setSignerAddress(address);
-    //todo: connect weth and uni contracts
-    // });
+    signer.getAddress().then((address) => {
+      setSignerAddress(address);
+      //todo: connect weth and uni contracts
+      wethContract.balanceOf(address).then((res) => {
+        setWethAmount(Number(ethers.utils.formatEther(res)));
+      });
+      uniContract.balanceOf(address).then((res) => {
+        setUniAmount(Number(ethers.utils.formatEther(res)));
+      });
+    });
   };
 
   // if (signer !== undefined) {
